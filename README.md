@@ -1,37 +1,30 @@
-## Welcome to GitHub Pages
+## Dark Souls Map Viewer
 
-You can use the [editor on GitHub](https://github.com/Timryan3001/timryan3001.github.io/edit/main/README.md) to maintain and preview the content for your website in Markdown files.
+WebGL/three.js implementation of a map viewer for _Dark Souls_ and _Dark Souls 2_, using the games' collision data.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+The program is packaged as a Chrome app, but can be viewed in any browser by opening `index.html`. On some browsers (Firefox, Safari) this works fine, but on others you may need to open the page through http. The simplest way to do this, if you have python, is to run `python -m SimpleHTTPServer` in the dark-souls-map-viewer directory, then go to [http://localhost:8000](http://localhost:8000).
 
-### Markdown
+### Details
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+Inspired by Vlad001's [dksmv](http://forum.xentax.com/viewtopic.php?f=16&t=7876&start=60), from which I took the extracted map files for _Dark Souls_ (rehosted by Kayin Nasaki [here](http://kayin.pyoko.org/?p=2218)). There is also the [Dark Souls Map Explorer](http://kayin.pyoko.org/?p=2249), created by Kayin Nasaki. The map files for _Dark Souls 2_ were extracted by [Ispohr](http://www.reddit.com/r/DarkSouls2/comments/21kxov/dark_souls_2_map_viewer/). The .iv file format was deciphered by looking at Allanlw's [eat.py](https://gist.github.com/allanlw/8214620). Wireframe rendering taken from [Florian Boesch](http://codeflow.org/entries/2012/aug/02/easy-wireframe-display-with-barycentric-coordinates/) and [Andreas B&aelig;rentzen](http://www.compute.dtu.dk/~janba/Wireframe/).
 
-```markdown
-Syntax highlighted code block
+The font used in the icons is Optimus Princeps Semi Bold.
 
-# Header 1
-## Header 2
-### Header 3
+### .iv File Format
+The .iv file format stores a number of triangle meshes together in index array format.
 
-- Bulleted
-- List
+First 4 bytes: uint32 containing number of chunks.<br>
+Next 12 bytes: 3 float32s, use unknown.<br>
+Next 16 * (number of chunks) bytes: 4 uint32s containing:
 
-1. Numbered
-2. List
+ - Byte offset for start of vertex index data.
+ - Number of indices.
+ - Byte offset for start of vertex position data.
+ - Number of vertices.
 
-**Bold** and _Italic_ and `Code` text
+Vertex index data, 2 * (number of indices) bytes: 1 uint16 per index.<br>
+Vertex position data, 12 * (number of vertices) bytes: 3 float32s per vertex.
 
-[Link](url) and ![Image](src)
-```
+### License
 
-For more details see [Basic writing and formatting syntax](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/Timryan3001/timryan3001.github.io/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+This content is released under the MIT License.
